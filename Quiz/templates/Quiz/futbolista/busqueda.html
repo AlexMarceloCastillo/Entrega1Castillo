@@ -4,6 +4,29 @@
 
 {% block content %}
 
-    <h1>Buscar futbolista</h1>
+<div class="mx-auto col-lg-6">
+
+    <h1>Buscar Futbolista</h1>
+    <form action="/quiz/players/search" method="get">
+        <input type="text" name="query" id="query" value="{{ query }}">
+        <input type="submit" value="Enviar">
+    </form>
+
+    {% if query %}
+    {% if players %}
+    <h5>Resultados de "{{ query }}"</h5>
+    <ul>
+        {%for n in players%}
+        <li>
+            <p> {{ n.nombre }} {{ n.apellido }}. Nacimiento: {{ n.fecha_nacimiento }}</p>
+        </li>
+        <br>
+        {%endfor%}
+    </ul>
+    {% else %}
+    <h5>No se encontraron resultados de la busqueda de "{{ query }}"</h5>
+    {% endif %}
+    {% endif %}
+</div>
 
 {% endblock %}
